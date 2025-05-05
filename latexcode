@@ -1,0 +1,488 @@
+#LAYEXcOde
+
+
+here is my latex code(i'm not at xpert using latex): 
+
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Permite insertar imágenes
+\usepackage{caption}  % Mejora la personalización de los títulos de las figuras
+\usepackage{titling}  % Mejora el control de títulos
+\usepackage{geometry} % Ajusta los márgenes
+
+% Configurar márgenes
+\geometry{top=2cm, bottom=2cm, left=2.5cm, right=2.5cm}
+
+
+\begin{document}
+
+% Portada
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Logo-UPJR.png} % Cambia "logo.png" por el nombre de tu archivo
+    \vspace{1cm} % Espacio vertical
+    
+    {\Huge \textbf{Universidad Politecnica de Juventino Rosas}} \\[1cm] % Nombre de la universidad
+    {\LARGE Ingenieria en Redes y Telecomunicaciones} \\[0.5cm] % Facultad
+   
+    {\Huge \textbf{Creación de un Traductor de Lenguaje de Señas Mediante el uso de CNNs y Vision por Computadora}} \\[0.5cm] % Número de práctica  {\LARGE} \\[1cm] % Título de la práctica
+
+    \vspace{6cm}
+
+    \textbf{Alumno:} Adan Tadeo Lera Vargas. \\[0.5cm] % Nombre del estudiante
+    \textbf{Tutor:} Juan Heriberto Galindos Gallegos \\[0.5cm] % Nombre del profesor
+    \vfill % Empuja el siguiente texto hacia la parte inferior
+
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+Este proyecto se centra en el desarrollo de un sistema de traducción del Lenguaje de Señas Mexicano (LSM) utilizando Redes Neuronales Convolucionales (CNNs). El objetivo principal es crear una herramienta que facilite la comunicación entre personas sordas y oyentes, eliminando las barreras lingüísticas.\\ 
+Se explorarán y aplicarán técnicas de aprendizaje profundo, específicamente la arquitectura VGG16, junto con librerías como TensorFlow, Keras, MediaPipe y OpenCV, para lograr un reconocimiento preciso de las señas. Este proyecto busca contribuir a la inclusión y accesibilidad, mejorando la calidad de vida de la comunidad sorda.
+
+
+\section{Capitulo 1}
+
+\subsection{Objetivo General}
+
+\begin{flushleft}
+   Desarrollar un sistema de traducción del Lenguaje de Señas Mexicano (LSM) a texto, utilizando Redes Neuronales Convolucionales (CNNs) esto con el fin de facilitar la comunicación entre personas sordas y oyentes.
+\end{flushleft}
+
+\subsection{Objetivos Especificos}
+\begin{flushleft}
+
+    \begin{enumerate}
+  
+
+\item Recopilar y preparar un conjunto de datos robusto de imágenes y videos del Lenguaje de Señas Mexicano (LSM) medinate datasets.
+ 
+
+\item Implementar y entrenar un modelo de Red Neuronal Convolucional (CNN) basado en la arquitectura VGG16 para el reconocimiento de señas.
+
+\item Integrar las librerías MediaPipe y OpenCV para la detección de manos y el preprocesamiento de imágenes.
+
+\item Evaluar la precisión y eficiencia del sistema de traducción, y realizar ajustes para mejorar su rendimiento.
+
+\end{enumerate}
+\end{flushleft}
+\newpage
+\section{Capitulo 2}
+\subsection{Marco Teorico}
+\begin{flushleft}
+    El lenguaje de señas es un sistema de comunicación visual-gestual que usa como herramienta las manos, la expresión facial y la postura corporal para transmitir información. Es utilizado por la comunidad sordo-muda y tiene variaciones en cada país, este caso se integrara y trabajara con la Lengua de Señas Mexicana (LSM).
+\end{flushleft}
+
+A diferencia del lenguaje hablado, el lenguaje de señas no es una traducción directa de las palabras, sino que posee su propia sintaxis y gramática. Algunas de sus características principales incluyen:
+\begin{itemize}
+    \item Uso del espacio tridimensional para estructurar frases.
+    \item Expresión de conceptos mediante gestos y expresiones faciales(en ocaciones para ser mas claros).
+    \item Orden de sintaxis diferente a nuestro lenguaje.
+\end{itemize}
+\newpage
+
+\subsection{Tecnologías a Implementar para la Traducción del Lenguaje de Señas}
+
+\subsubsection{Aprendisaje medinate CNNs}
+
+El reconocimiento de señas requiere algoritmos avanzados que puedan detectar datos y patrones complicados. Las Redes Neuronales Convolucionales (CNNs) serán las encargadas de analizar imágenes y videos mediante el filtrado de matrices para la interpretación de los datos y patrones, esto gracias a su capacidad de interpretar patrones complejos.
+
+
+\subsubsection{Arquitectura VGGNet (VGG16)}
+VGGNet es una arquitectura de red neuronal convolucional que tiene una entrada a convNet basada en VGG la cual es una imagen RGB de 224x224. La capa de preprocesamiento toma la imagen RGB con valores de píxeles en el rango de 0 a 255 y resta los valores promedio de la imagen, que se calculan sobre todo el conjunto de entrenamiento de ImageNet.\\
+Tras el preprocesamiento, las imágenes de entrada pasan por estas capas de peso para que despues las imágenes de entrenamiento pasen por una pila de capas convolucionales. La arquitectura VGG16 cuenta con un total de 13 capas convolucionales y 3 capas completamente conectadas. VGG utiliza filtros más pequeños (3x3) con mayor profundidad, en lugar de filtros grandes. Al final, se ha logrado el mismo campo receptivo efectivo que si solo se tuviera una capa convolucional de mayor.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{vggs-Work.png}
+   
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{vgg16-Se.png}
+    \caption{Funcionamiento de la VGG16}
+\end{figure}
+\newpage
+
+\subsubsection{Editor de Codigo y Languaje de Programación}
+Se hara uso del editor de codigo Visual Studio Code debido a su:
+\begin{enumerate}
+    \item \textbf{Eficiencia y agilidad en la programación:} VSCode es un editor ágil que funciona en equipos con recursos limitados. Además, su interfaz de usuario es muy intuitiva, permitiendo comenzar a trabajar sin dificultad alguna. 
+    \item \textbf{Amplia compatibilidad con lenguajes y frameworks:} Tiene la capacidad para admitir una amplia variedad de lenguajes y frameworks para trabajar. 
+    \item \textbf{Personalización y extensibilidad para adaptarse a las necesidades:} VSCode tiene una cantidad de extensiones que podemos encontrar para poder ampliar sus funcionalidades, adaptándose así a nuestras necesidades. 
+\end{enumerate}
+
+Como lenguaje de programación usaremos \textbf{Phyton} , este se trata de un lenguaje que cuenta con ciertas características tales como la ejecución línea a línea del codigo, es decir, necesita de un intérprete que lea el código en tiempo real para su ejecución simultánea, también usa una sintaxis más simple que la de otros lenguajes. Python se centra en la legibilidad, por lo que es mucho más sencillo de leer. Funciona como un rompecabezas en el que se encajan las piezas, en lugar de construir cada una de ellas desde cero, volviéndolo así un lenguaje con bastantes herramientas fácil de comprender.
+
+
+\subsubsection{Librerias y Frameworks}
+Para este proyecto se hara uso de las librerias de:
+\begin{enumerate}
+    \item  TensorFlow/Keras: Es un framework de código abierto utilizado para el aprendizaje automático y el aprendizaje profundo mientras que Keras es una API de alto nivel que se ejecuta sobre TensorFlow, simplificando la construcción y el entrenamiento de redes neuronales. \\
+    Se implementa debido a su gran poder para entrenar CNNs ademas de que keras tiene modelos pre entrenados, muy útiles para la transferencia de aprendizaje, como lo es la aquitectura VGG16.
+    \item MediaPipe: Es un framework de para construir aplicaciones de percepción multimodal en aprendizaje automático aplicado.\\
+    Se implementa debido a que nos permite detectar las manos en las imágenes y extraer los puntos de referencia de las manos.
+Con los puntos de referencia es posible calcular las distancias y ángulos para obtener características que representen las señas.
+    \item OpenCV: Es una biblioteca de visión por computadora de código abierto que proporciona herramientas para el procesamiento de imágenes y video. 
+    Se implementa debido a su capacidad para cargar y preprocesar las imágenes de nuestro dataset.\\
+Nos permite realizar tareas como el cambio de tamaño de las imágenes, la normalización de los píxeles y la aplicación de transformaciones de aumento de datos.
+    \item Scikit-learn: Es una biblioteca de aprendizaje automático de código que proporciona herramientas para la clasificación, la regresión, la agrupación y demas tareas de aprendizaje automático.\\
+    Se implementa debido a su utilidad para dividir nuestro dataset en conjuntos de entrenamiento y prueba.
+    
+\end{enumerate}
+
+
+
+\newpage
+
+
+\section{Capitulo 3}
+\subsection{Antecedentes}
+
+\begin{flushleft}
+    Este proyecto con un impacto social muy grande, ya ha sido estudiado y analizado por distintas personas y entidades, lo que nos da unas excelentes bases para poder hacerlo.
+    Los antecedentes de este proyecto involucran la gramatica lingüística, la inteligencia artificial o IA y por ultimo la vision por computadora. 
+
+A continicaion se presentan los antecedentes clave: 
+
+\subsubsection{Traductores del Lenguaje de Señas }
+\begin{itemize}
+    \item Desarrollo de sistemas automáticos de traducción: Los primeros esfuerzos por crear traductores automáticos para el lenguaje de señas comenzaron con investigaciones en el área de reconocimiento de gestos y procesamiento de imágenes.
+    \item Sistemas de reconocimiento gestual: A finales del siglo XX y principios del XXI, la visión por computadora y las técnicas de aprendizaje automático se combinaron para interpretar los gestos del lenguaje de señas a través de cámaras y sensores. Estos sistemas incluyen el uso de redes neuronales profundas para identificar y clasificar gestos.
+    \item Modelos de traducción basados en IA: En los últimos años, los modelos de inteligencia artificial, como los de aprendizaje profundo (deep learning), se han utilizado para mejorar la precisión y velocidad de la traducción de señas a texto o voz. La integración de IA ha permitido avances en la traducción de oraciones completas, no solo palabras aisladas.
+
+\end{itemize}
+    
+\end{flushleft}
+
+\subsubsection{Tecnologías que han sido Involucradas}
+
+\begin{enumerate}
+    \item Reconocimiento de gestos: Se han usado cámaras RGB, sensores de profundidad o guantes electrónicos equipados con sensores para captar los movimientos de las manos, dedos, y otras partes del cuerpo.
+\item Visión por computadora: Los sistemas de traducción requieren el procesamiento de imágenes y vídeos para interpretar los gestos, lo que implica el uso de algoritmos de visión artificial como la detección de características, seguimiento de movimiento y segmentación.
+\item Modelos de traducción automática: Para traducir la secuencia de gestos en un mensaje comprensible, se emplean redes neuronales convolucionales (CNN) y recurrentes (RNN), especialmente LSTM (Long Short-Term Memory) para reconocer patrones secuenciales y mantener el contexto.
+\item Interfaz de usuario: Para que el sistema sea útil, es necesario desarrollar una interfaz amigable para los usuarios sordos y para las personas que no manejan el lenguaje de señas. Esto puede incluir texto, voz, o incluso representaciones gráficas.
+\end{enumerate}
+\newpage
+\subsubsection{ Proyectos y Avances Recientes}
+
+\begin{itemize}
+    \item Guantes Inteligentes: Algunos proyectos de traducción de señas se basan en guantes equipados con sensores de movimiento y flexión que detectan la postura y los movimientos de los dedos, permitiendo que las señales sean interpretadas digitalmente.
+\item Sistemas en Tiempo Real: Existen proyectos que buscan traducir el lenguaje de señas en tiempo real, con resultados mixtos debido a la complejidad de los gestos y la velocidad del lenguaje de señas.
+\item Aplicaciones y Dispositivos: En el ámbito comercial, se han lanzado algunas aplicaciones móviles y dispositivos portátiles que buscan ayudar en la traducción de lenguaje de señas, aunque estos aún están en desarrollo y mejora.
+\end{itemize}
+
+\newpage
+\section{Capitulo 4}
+\subsection{Desarollo}
+
+Las Redes Neuronales Convolucionales (CNN) representan una clase fundamental de algoritmos de aprendizaje profundo, diseñados específicamente para abordar tareas que involucran el reconocimiento de objetos, como la clasificación, la detección y la segmentación de imágenes.
+Son estas mismas clasificaiones y detecciones las que hacen ideal su uso para capturar los patrones visuales y complejos que caracterizan a el lenguaje de señas.
+
+\vspace{0.2cm}
+Para comprender el funcionamiento básico de una CNN, se puede recurrir a una analogía con el sistema visual humano. Al igual que nuestro cerebro procesa imágenes a través de una red de neuronas interconectadas que operan en campos receptivos y colaboran para cubrir todo el campo visual, las CNN emplean capas de neuronas organizadas jerárquicamente para interpretar diferentes niveles de abstracción. Inicialmente, estas redes detectan patrones simples, como líneas y curvas, para luego progresar hacia la identificación de formas más complejas, como rostros u objetos. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Cnn.png}
+    \caption{Comportamiento de una CNN}
+\end{figure}
+\newpage
+\subsubsection{Funcionamiento de las CNN}
+Las redes neuronales convolucionales utilizan una serie de capas, cada una de las cuales detecta diferentes características de una imagen de entrada. Cada una de las capas se basa en los resultados de las capas anteriores para reconocer patrones detallados.
+
+\begin{itemize}
+    \item Capa de entrada : cada neurona de la capa de entrada corresponde a una de las características de entrada.
+    \item  Capa oculta : son las capas entre la capa de entrada y la capa de salida. Cada neurona de esta capa se suma con el resultado de las neuronas de las capas anteriores.
+    \item Capa de salida : El número de neuronas en la capa de salida corresponde al número de clases de salida. Una vez realizada la predicción, se calcula una pérdida y la red entra en un proceso iterativo de automejora mediante el cual se ajustan los pesos mediante retropropagación para reducir este error.
+\end{itemize}
+
+
+
+\subsubsection{Capas Ocultas de una CNN}
+\begin{itemize}
+    \item \textbf{Capa de convolución} \\
+    La capa convolucional extrae las características mas importantes de los datos.
+    Esta capa cuenta con varios filtros que realizan la operación de convolución y cada imagen se considera una matriz de valores de píxeles, a la primera matriz extraida que es un filtro, también se le conoce como kernel.
+\end{itemize}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{capaC.png}
+    \caption{Comportamiento la Capa de Convolución.}
+\end{figure}
+\newpage
+
+\begin{itemize}
+    \item \textbf{Capa ReLU} \\
+    Una vez extraídas las características, el siguiente paso es transferirlos a una capa ReLU que significa unidad lineal rectificada.
+    Nos ayuda a evitar el problema del desvanecimiento del gradiente  generando la entrada directamente si es positiva o de lo contrario, se genera a cero. La capa ReLu facilita el entrenamiento de redes neuronales profundas, logrando un eficiente  y acelerado proceso de entrenamiento.   
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Grafico-ReLu.png}
+    \caption{Gráfico de una función ReLU.}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Capa de agrupación}\\
+    La agrupación es una operación de submuestreo que reduce la dimensionalidad del mapa de características. El mapa de características rectificado pasa ahora por una capa de agrupación para generar un mapa de características agrupado.
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{pooling-layer.png}
+    \caption{Agrupación de valores.}
+\end{figure}
+\end{itemize}
+La capa de agrupación utiliza varios filtros para identificar diferentes partes de la imagen, como bordes, esquinas y cuerpo.
+\newpage
+
+\begin{itemize}
+    \item \textbf{Capa de activación}\\
+    Esta capa es crucial para que la red aprenda patrones complejos. Las funciones de activación comunes, como ReLU, transforman la entrada manteniendo inalterado el tamaño de la salida.
+    La capa de activación introduce no linealidad en la red mediante la aplicación de una función de activación a la salida de la capa anterior.
+     \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{activationLayer.png}
+    \caption{Capa de activacion.}
+\end{figure}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Capa de Aplanado}\\
+        Este método se utiliza para convertir todas las matrices bidimensionales resultantes de los mapas de características agrupados en un único vector lineal continuo y largo.
+     \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{aplanado.png}
+    \caption{Matriz a vector lineal.}
+\end{figure}
+\newpage
+
+La matriz aplanada se introduce como entrada en la capa completamente conectada para clasificar la imagen.
+
+ \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{aplanado-Se.png}
+    \caption{Estructura Implementando la Capa de Aplanado.}
+\end{figure}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Capa totalmente conectada}\\
+
+ \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{aplanado-Te.png}
+    \caption{Coneccion de la capa o capa totalmente conectada.}
+\end{figure}
+
+    
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Capa de abandono}\\
+     Una capa de abandono elimina aleatoriamente algunas neuronas de la red para solucionar promemas de sobreajuste en el conjunto de datos de entrenamiento.
+
+      \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{layerDropout.png}
+    \caption{Capa de abandono implementada y no implementada.}
+\end{figure}
+\end{itemize}
+
+
+\newpage
+
+
+\subsubsection{Relacion de CNNs para el lenguaje}
+
+\begin{enumerate}
+    \item Captura de las Características Visuales:
+\begin{itemize}
+    \item Forma y posición de las manos.
+\end{itemize}
+\begin{itemize}
+    \item Movimientos de las manos y brazos.
+\end{itemize}
+Las capas convolucionales de la red aplican filtros que detectan bordes, texturas y otros patrones visuales.
+
+    
+    \item Reconocimiento de Patrones:
+\begin{itemize}
+    \item Una vez que las CNNs han extraído las características visuales, las capas totalmente conectadas de la red se encargan de clasificar estas características y reconocer las señas individuales o la secuencias de señas.
+\end{itemize}
+
+\begin{itemize}
+    \item La red aprende a asociar patrones visuales específicos con señas particulares a través del entrenamiento con grandes conjuntos de datos: imágenes y videos del lenguaje de señas.
+\end{itemize}
+    
+\end{enumerate}
+
+\subsubsection{Entrenamiento de la CNN}
+ Para comenzar a entrenar nuestra red neuronal tendremo que tomar en cuenta los siguientes aspectos: 
+ \begin{enumerate}
+     \item Recolección de los datos.
+     \item Configuración para el entrenamiento. 
+     \item Ejecución del entrenamiento. 
+     \item Evaluación despues de finalizar el entrenamiento.
+ \end{enumerate}
+\newpage
+ El entrenamiento de una red neuronal es un proceso experimental, por lo cual es importante realizar varias pruebas e interacciones con los datos y parámetros, ésto para  el mejor desempeño posible.
+ \vspace{0.2cm}
+ Es por ello que se comenzara por la integración del abecedario. 
+ Estos datos seran recabados de un dataset el cual es un sistema donde la información se almacena en una estructura de directorios y carpetas, esto para facilitar la organización, búsqueda y acceso a los datos que utilizaremos. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{datasetLSM.png}
+    \caption{Dataset LSM}
+\end{figure}
+
+\newpage
+
+\section{Capitulo 5}
+\subsection{Resultados}
+Es asi exactamente cómo la CNN es capas de reconocer el lenguaje de  señas:
+
+\begin{itemize}
+    \item Los píxeles de la imagen se introducen en la capa convolucional que realiza la operación de convolución.
+\end{itemize}
+
+\begin{itemize}
+    \item El resultado es un mapa convolucionado. 
+\end{itemize}
+
+\begin{itemize}
+    \item Al mapa convolucionado se le aplica a una función ReLU para generar un mapa de características rectificado. 
+\end{itemize}
+
+\begin{itemize}
+    \item La imagen se procesa con múltiples convoluciones y capas ReLU para localizar las características. 
+\end{itemize}
+
+\begin{itemize}
+    \item Se utilizan diferentes capas de agrupación con varios filtros para identificar partes específicas de la imagen. 
+\end{itemize}
+
+\begin{itemize}
+    \item El mapa de características agrupadas se aplana y se envía a una capa completamente conectada para obtener el resultado final.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{finallyresultado.jpeg}
+    \caption{}
+\end{figure}
+
+\newpage
+
+En cuanto al entorno de vision por computadora tenemos un codigo capas de detectar nuestras dos manos:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{hand1.png}
+    \caption{Detección de una sola mano.}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{hand2.png}
+    \caption{Detección de ambas manos.}
+\end{figure}
+\newpage
+Utilizando Mediapipe Landmark System: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{mediapipeSystem.png}
+    \caption{Detección de ambas manos.}
+\end{figure}
+Codigo: 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{code1.png}
+    \caption{Importacion de librerias e inicializacion de la captura de video.}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{code2.png}
+    \caption{Inicio del modelo de deteccion de manos.}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{code3.png}
+    \caption{Imagen RGB y procesamiento con Madiapipe.}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{code4.png}
+    \caption{Dubujo de resultados.}
+\end{figure}
+
+
+
+\newpage
+
+
+
+\section{Capitulo 6}
+\subsection{Conclusión}
+Este proyecto ha explorado y aplicado con éxito técnicas de aprendizaje profundo, específicamente Redes Neuronales Convolucionales (CNNs), para el reconocimiento y traducción del Lenguaje de Señas Mexicano (LSM). La implementación de la arquitectura VGG16, junto con el uso de librerías como TensorFlow, Keras, MediaPipe y OpenCV, ha demostrado ser efectiva en la captura y análisis de los patrones visuales complejos del LSM. Los resultados obtenidos muestran el potencial de esta tecnología para facilitar la comunicación entre personas sordas y oyentes, mejorando la inclusión y la accesibilidad.
+\\
+Sin embargo, es importante reconocer que este es un proyecto en desarrollo y que existen áreas de mejora. Futuros trabajos podrían centrarse en expandir el vocabulario de señas reconocidas, mejorar la precisión de la traducción en tiempo real y optimizar la interfaz de usuario para una mayor accesibilidad. Además, se podría explorar la integración de otras modalidades, como la traducción a voz, para ofrecer una solución más completa.
+\\
+
+\newpage
+
+\section{Capitulo 7}
+
+   \begin{thebibliography}{6}
+	\bibitem{uno}
+    \textit{Autoridad Educativa Federal en la Ciudad de México (AEFCM). (2024). Lengua de Señas Mexicana. Consultado de: }
+    \url{https://www.aefcm.gob.mx/dgenam/archivos-2024/2024-06-04/LSM.pdf}
+    
+    \bibitem{dos}
+    \textit{Centro de Normalización Lingüística de la Lengua de Señas Española (CNLSE). (s.f.). Directrices para lograr el reconocimiento de los derechos de las personas sordas a la lengua de señas. Consultado de:}
+    \url{https://cnlse.es/es/recursos/biblioteca/directrices-para-lograr-el-reconocimiento-de-los-derechos-de-las-personas-sordas-a-la-lengua-de-senas}
+
+       \bibitem{tres}
+    \textit{Libre Acceso, A.C. (2003). Diccionario Español - Lengua de Señas Mexicana (DIELSEME). Consultado de:}
+    \url{ https://libreacceso.org/wp-content/uploads/2020/12/DIELSEME.pdf
+}
+
+       \bibitem{cuatro}
+    \textit{Biswal, A. (2025, 25 marzo). CNN in Deep Learning: Algorithm and Machine Learning Uses. Simplilearn.com.  }
+    \url{https://www.simplilearn.com/tutorials/deep-learning-tutorial/convolutional-neural-network}
+
+         \bibitem{cinco}
+    \textit{Salgado Martínez, R., Cuevas Valencia, R. E., Morales, A. F., & Catalán Villegas, A. (2023). Reconocimiento de señas de la Lengua de Señas Mexicana mediante técnicas de Inteligencia Artificial. Revista XIKUA, 12(Especial), 27-33. Colsultado de: }
+    \url{https://repository.uaeh.edu.mx/revistas/index.php/xikua/article/view/12696}
+
+         \bibitem{seis}
+    \textit{Sahai, N. (2024, 9 enero). Convolutional neural network: layers, types, & more. AnalytixLabs Blog: Master AI, Data Science & Analytics Skills. }
+    \url{https://www.analytixlabs.co.in/blog/convolutional-neural-network/#How_does_CNN_work}
+
+         \bibitem{siete}
+    \textit{Nepal, P. (2024, 1 febrero). VGGNet Architecture Explained - Analytics Vidhya - Medium. Medium.  }
+    \url{ https://medium.com/analytics-vidhya/vggnet-architecture-explained-e5c7318aa5b6}
+
+          \bibitem{ocho}
+    \textit{Díaz Balderas, Gil Alberto. (2016).Traductor del lenguaje de señas mexicano a texto. Centro de Investigacion y de Estudios Avanzados del Instituto Politecnico Nacional  }
+    \url{https://repositorio.cinvestav.mx/handle/cinvestav/2314}
+
+    \bibitem{nueve}
+    \textit{Ecanorea. (2024, 8 noviembre). Convolutional Neural Network: Guide to understanding them. Plain Concepts.}
+    \url{https://www.plainconcepts.com/convolutional-neural-network-guide/}
+
+    
+\end{thebibliography}
+\end{document}
+
